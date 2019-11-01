@@ -1,0 +1,11 @@
+version: 2.1
+jobs:
+  build:
+    working_directory: /go/src/github.com/anraku/circleci-sample
+    docker:
+      - image: circleci/golang:1.13.3
+   steps:
+      - checkout
+      - run: go get ./...
+      - run: go test -v ./...
+
