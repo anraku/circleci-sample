@@ -1,11 +1,18 @@
-version: 2.1
+version: 2
 jobs:
-  build:
-    working_directory: /go/src/github.com/anraku/circleci-sample
+  test:
     docker:
       - image: circleci/golang:1.13.3
-   steps:
+    working_directory: /go/src/github.com/anraku/circleci-sample
+    steps:
       - checkout
-      - run: go get ./...
       - run: go test -v ./...
+workflows:
+  version: 2
+  pull-request:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
 
